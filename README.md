@@ -3,7 +3,7 @@
 
 ## Usage
 ```shell
-degit chris-zhu/starter-ts <Project name>
+degit zyyv/starter-ts <Project name>
 ```
 
 ```shell
@@ -26,7 +26,7 @@ pnpm dev
 
 ### GitHub Template
 
-[Create a repo from this template on GitHub](https://github.com/chris-zhu/starter-ts/generate).
+[Create a repo from this template on GitHub](https://github.com/zyyv/starter-ts/generate).
 
 ## Checklist
 
@@ -42,4 +42,4 @@ And, enjoy :)
 
 ## License
 
-[MIT](./LICENSE) License © 2022 [chris-zhu](https://github.com/chris-zhu)
+[MIT](./LICENSE) License © 2023 [zyyv](https://github.com/zyyv)

@@ -1,9 +1,9 @@
 {
-  "name": "name",
+  "name": "tiny-sdk",
   "version": "0.0.0",
   "packageManager": "pnpm@7.14.0",
-  "description": "[description]",
-  "keywords": [],
+  "description": "A sdk of tiny tools.",
+  "keywords": ["sdk", "tiny", "tools"],
   "license": "MIT",
   "author": "Chris <https://github.com/zyyv>",
   "repository": {
@@ -48,8 +48,8 @@
   },
   "homepage": "https://github.com/zyyv/starter-ts#readme",
   "devDependencies": {
+    "@antfu/eslint-config": "latest",
     "@babel/types": "^7.20.2",
-    "@chris-zhu/eslint-config": "^1.0.5",
     "@types/node": "^18.11.9",
     "bumpp": "^8.2.1",
     "eslint": "^8.27.0",
