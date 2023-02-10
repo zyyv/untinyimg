@@ -20,8 +20,8 @@
     "paths": {
       "@/*": [
         "src/*"
-      ],
+      ]
     }
   },
-  "exclude": [ "packages/**/__test__", "packages/**/test" ]
+  "exclude": ["packages/**/__test__", "packages/**/test"]
 }

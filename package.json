@@ -3,30 +3,32 @@
   "version": "0.0.0",
   "packageManager": "pnpm@7.14.0",
   "description": "A sdk of tiny tools.",
+  "author": "Chris <https://github.com/zyyv>",
+  "license": "MIT",
+  "homepage": "https://github.com/zyyv/starter-ts#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyyv/starter-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zyyv/starter-ts/issues"
+  },
   "keywords": [
     "sdk",
     "tiny",
     "tools"
   ],
-  "license": "MIT",
-  "author": "Chris <https://github.com/zyyv>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zyyv/starter-ts.git"
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "files": [
-    "dist"
-  ],
   "typesVersions": {
     "*": {
       "*": [
@@ -35,7 +37,9 @@
       ]
     }
   },
-  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf dist && unbuild",
     "dev": "unbuild --stub",
@@ -47,10 +51,6 @@
     "test:update": "vitest -u",
     "typecheck": "tcs --noEmit"
   },
-  "bugs": {
-    "url": "https://github.com/zyyv/starter-ts/issues"
-  },
-  "homepage": "https://github.com/zyyv/starter-ts#readme",
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
     "@babel/types": "^7.20.2",
