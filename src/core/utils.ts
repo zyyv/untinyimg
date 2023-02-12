@@ -1,4 +1,5 @@
 import path from 'path'
+import os from 'os'
 import fs from 'fs-extra'
 import { IMG_EXT } from './constant'
 
@@ -29,4 +30,18 @@ export async function getImgFiles(dir: string, extnames: string[] = IMG_EXT): Pr
 
 export async function isPathValid(filePath: string): Promise<boolean> {
   return await fs.pathExists(filePath)
+}
+
+export function getCpus(): number {
+  return os.cpus().length
+}
+
+export function formatFileSize(size: number) {
+  if (size < 1024)
+    return `${size} B`
+  if (size < 1024 * 1024)
+    return `${(size / 1024).toFixed(2)} KB`
+  if (size < 1024 * 1024 * 1024)
+    return `${(size / 1024 / 1024).toFixed(2)} MB`
+  return `${(size / 1024 / 1024 / 1024).toFixed(2)} GB`
 }
