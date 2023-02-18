@@ -1,17 +1,17 @@
 {
-  "name": "untiny",
+  "name": "untinyimg",
   "type": "module",
   "version": "0.0.0",
-  "description": "A sdk of tiny tools.",
+  "description": "A cli tools of tinypng.",
   "author": "Chris <https://github.com/zyyv>",
   "license": "MIT",
-  "homepage": "https://github.com/zyyv/starter-ts#readme",
+  "homepage": "https://github.com/zyyv/untinyimg#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zyyv/starter-ts.git"
+    "url": "git+https://github.com/zyyv/untinyimg.git"
   },
   "bugs": {
-    "url": "https://github.com/zyyv/starter-ts/issues"
+    "url": "https://github.com/zyyv/untinyimg/issues"
   },
   "keywords": [
     "untiny",
@@ -29,13 +29,8 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/index.d.ts"
-      ]
-    }
+  "bin": {
+    "untiny": "./bin/untiny.mjs"
   },
   "files": [
     "dist"
@@ -45,9 +40,8 @@
     "dev": "unbuild --stub",
     "prepublishOnly": "pnpm run build",
     "release": "bumpp --commit --push --tag && pnpm publish",
-    "start": "esno src/index.ts",
     "lint": "eslint .",
-    "test": "rimraf test/output && esno src/test.ts",
+    "test": "vitest",
     "test:update": "vitest -u",
     "typecheck": "tcs --noEmit"
   },

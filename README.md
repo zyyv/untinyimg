@@ -1,44 +1,83 @@
-<h1 align="center">starter-ts</h1>
-<p align="center">Build your ts project quickly</p>
+# untinyimg [![npm](https://img.shields.io/npm/v/untinyimg.svg)](https://npmjs.com/package/untinyimg)
+
+A cli tools of tinypng.
 
 ## Usage
+### Cli
 ```shell
-degit zyyv/starter-ts <Project name>
+npm i -D untinyimg
 ```
 
 ```shell
-code <Project name>
+untiny -h # help
 ```
 
-Then
-    
-```shell
-pnpm i
+### Api
+
+#### `createUntiny`
+Create your untiny instance.
+
+```ts
+import { createUntiny } from 'untinyimg'
+
+const untiny = createUntiny('your api key')
 ```
-Run
-```shell
-pnpm dev
+
+#### `compressDir`
+Compress all images in the directory.
+
+```ts
+untiny.compressDir('your dir path of images')
 ```
 
-## Try it now!
+#### `compressImages`
+Compress all images with an array.
 
-> Starter-ts requires Node >=14
+```ts
+untiny.compressImages('your file path array of images')
+```
 
-### GitHub Template
+#### `compressImage`
+Compress a image.
 
-[Create a repo from this template on GitHub](https://github.com/zyyv/starter-ts/generate).
+```ts
+untiny.compressImage('your file path of image')
+```
 
-## Checklist
+### types
+`compressDir`、`compressImages`、`compressImage` support options in second param.
 
-When you use this template, try follow the checklist to update your info properly
+```ts
+export interface CompressOption {
+  /**
+   * convert file path to return a new file path
+   * @param originPath origin file path
+   * @param originImgName origin file name
+   * @returns new file path
+   */
+  handler?: (originPath: string, originImgName: string) => string
 
-- [ ] Update the package.json
-- [ ] Change the author name in `LICENSE`
-- [ ] Change the favicon in `public`
-- [ ] Remove the `.github` folder which contains the funding info
-- [ ] Clean up the READMEs and remove routes
+  /**
+   * Your desired image types. The following options are available as a type:
+   */
+  convertType?: IMG_TYPE | IMG_TYPE[]
 
-And, enjoy :)
+  /**
+   * The transform object specifies the stylistic transformations that will be applied to your image
+   */
+  transform?: string
+
+  /**
+   * Whether to print debug information
+   * @default true
+   */
+  debug?: boolean
+}
+
+export type IMG_EXT = '.png' | '.jpg' | '.jpeg' | '.webp'
+
+export type IMG_TYPE = 'image/png' | 'image/jpeg' | 'image/webp' | 'image/jpg' | '*/*'
+```
 
 ## License
 

@@ -126,7 +126,7 @@ export class TinifyCompressor {
   }
 }
 
-export async function createTinifyCompressor(key?: string) {
+export async function createUntiny(key?: string) {
   key = key ?? (await getConfig()).untiny.apiKey
   return new TinifyCompressor(key)
 }
