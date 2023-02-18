@@ -1,27 +1,16 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "lib": ["esnext"],
-    "types": ["node"],
-    "target": "esnext",
+    "target": "es2021",
     "module": "esnext",
-    "useDefineForClassFields": true,
-    "moduleResolution": "node",
+    "lib": ["es2019"],
     "strict": true,
-    "sourceMap": false,
-    "allowJs": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
     "noUnusedLocals": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "removeComments": false,
-    "baseUrl": ".",
-    "rootDir": ".",
-    "outDir": "dist",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
+    "types": ["node"]
   },
-  "exclude": ["packages/**/__test__", "packages/**/test"]
+  "include": ["src", "tests", "scripts"],
+  "exclude": ["tests/fixtures"]
 }

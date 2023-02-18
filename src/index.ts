@@ -5,11 +5,15 @@ import consola from 'consola'
 import { IMG_EXT, separator } from './constant'
 import type { CompressOption } from './types'
 import { formatFileName, formatFileSize, isPathValid } from './utils'
+import { getConfig } from './cli-start'
 
 export class TinifyCompressor {
   private tinifyInstance: typeof tinify
 
   constructor(key: string) {
+    if (!key)
+      throw new Error('Please enter your API key')
+
     this.tinifyInstance = this.init(key)
   }
 
@@ -120,4 +124,9 @@ export class TinifyCompressor {
     const imgFiles = await this.getImgFiles(dir)
     await this.compressImages(imgFiles, option)
   }
+}
+
+export async function createTinifyCompressor(key?: string) {
+  key = key ?? (await getConfig()).untiny.apiKey
+  return new TinifyCompressor(key)
 }

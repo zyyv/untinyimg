@@ -26,3 +26,13 @@ export interface CompressOption {
    */
   debug?: boolean
 }
+
+export interface Config {
+  untiny: {
+    /**
+     * Your API key
+     * @default ''
+     */
+    apiKey: string
+  }
+}

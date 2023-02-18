@@ -1,31 +1,11 @@
 import path from 'path'
 import { describe, expect, test } from 'vitest'
+import { loadConfig } from 'unconfig'
+import { sourcePackageJsonFields } from 'unconfig/presets'
 import { formatFileName, formatFileSize } from '../src/utils'
-
-// const __dirname = path.dirname(new URL(import.meta.url).pathname)
-// const assetsDir = path.resolve(__dirname, './assets')
+import type { Config } from '../src/types'
 
 describe('Assets Imgs', () => {
-  // test('getImgFiles', async () => {
-  //   const imgFiles = await getImgFiles(assetsDir)
-
-  //   expect(imgFiles).toMatchInlineSnapshot(`
-  //     [
-  //       "/Users/chris/projects/fork/tiny-sdk/test/assets/imgs/WechatIMG99.jpeg",
-  //       "/Users/chris/projects/fork/tiny-sdk/test/assets/imgs/avatar.png",
-  //       "/Users/chris/projects/fork/tiny-sdk/test/assets/imgs/test/couple.webp",
-  //     ]
-  //   `)
-
-  //   const tinifyIns = new TinifyCompressor(API_KEY)
-
-  //   imgFiles.forEach((imgFile) => {
-  //     tinifyIns.compressImage(imgFile, {
-  //       handler: (_, imgName) => path.resolve(__dirname, `./output/${imgName}`),
-  //     })
-  //   })
-  // })
-
   test('formatFileSize', () => {
     expect(formatFileSize(1024)).toBe('1.00 KB')
     expect(formatFileSize(1024 * 1024)).toBe('1.00 MB')
@@ -78,6 +58,32 @@ describe('Assets Imgs', () => {
         "Compress suceess of avatar.png      , Size: 12.52 MB  -> 3.93 MB  , Diff: 8.58 MB",
         "Compress suceess of couple.webp     , Size: 4.91 KB   -> 1.00 KB  , Diff: 3.91 KB",
       ]
+    `)
+  })
+})
+
+describe('Unconfigured', () => {
+  test('unconfigured', async () => {
+    const cwd = path.resolve(__dirname, './fixtures/configs')
+    const { config } = await loadConfig<Config>({
+      sources: [
+        {
+          files: 'untiny.config',
+          extensions: ['ts', 'mts', 'cts', 'js', 'mjs', 'cjs', 'json', ''],
+        },
+        sourcePackageJsonFields({
+          fields: 'untiny',
+        }),
+      ],
+      cwd,
+    })
+
+    expect(config).toMatchInlineSnapshot(`
+      {
+        "untiny": {
+          "apiKey": "222",
+        },
+      }
     `)
   })
 })
