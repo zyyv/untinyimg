@@ -3,12 +3,7 @@ import os from 'os'
 import fs from 'fs-extra'
 import { IMG_EXT } from './constant'
 
-/**
- * Get image files from directory
- * @param dir directory path
- * @param extnames file extensions
- * @returns image files of path[]
- */
+
 export async function getImgFiles(dir: string, extnames: string[] = IMG_EXT): Promise<string[]> {
   if (!(await isPathValid(dir)))
     throw new Error(`Path ${dir} is not valid.`)

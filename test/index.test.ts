@@ -1,5 +1,6 @@
+import path from 'path'
 import { describe, expect, test } from 'vitest'
-import { formatFileName, formatFileSize } from '../src/core/utils'
+import { formatFileName, formatFileSize } from '../src/utils'
 
 // const __dirname = path.dirname(new URL(import.meta.url).pathname)
 // const assetsDir = path.resolve(__dirname, './assets')
@@ -32,6 +33,8 @@ describe('Assets Imgs', () => {
   })
 
   test('formatFileName', () => {
+    expect(path.dirname('/Users/chris/projects/fork/tiny-sdk/test/assets/imgs/WechatIMG99.jpeg')).toMatchInlineSnapshot('"/Users/chris/projects/fork/tiny-sdk/test/assets/imgs"')
+
     const name = 'abcdasdasdasdasdasdsadasefghijkdasd.png'
     expect(name.length).toMatchInlineSnapshot('39')
     expect(formatFileName(name, 9, '***')).toMatchInlineSnapshot('"a***d.png"')
