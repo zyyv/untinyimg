@@ -81,7 +81,7 @@ describe('Unconfigured', () => {
     expect(config).toMatchInlineSnapshot(`
       {
         "untiny": {
-          "apiKey": "222",
+          "apiKey": "RWDMNgkQJGldpgBVhn5MJ2944cHxN2CK",
         },
       }
     `)
