@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Setup PNPM
+      - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: 7.26.0
+          version: 7.27.0
 
       - name: Install
         run: pnpm install
@@ -32,21 +32,19 @@ jobs:
         run: pnpm lint
 
   test:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        node: [14.x, 16.x]
-        os: [ubuntu-latest]
-      fail-fast: false
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup PNPM
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: 6.32.7
+          version: 7.27.0
 
       - name: Install
         run: pnpm install

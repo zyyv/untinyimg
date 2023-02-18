@@ -16,17 +16,16 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: 7.26.0
+          version: 7.27.0
 
       - name: Set node
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
 
-      - run: npx conventional-github-releaser -p angular
-        continue-on-error: true
+      - run: npx changelogithub
         env:
-          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GH_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
 
       - name: Install
         run: pnpm install
