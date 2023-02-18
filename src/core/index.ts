@@ -3,10 +3,7 @@ import fs from 'fs-extra'
 import consola from 'consola'
 import { separator } from './constant'
 import type { CompressOption } from './types'
-import { formatFileSize } from './utils'
-
-export * from './utils'
-export * from './constant'
+import { formatFileName, formatFileSize } from './utils'
 
 export class TinifyCompressor {
   private tinifyInstance: typeof tinify
@@ -20,6 +17,14 @@ export class TinifyCompressor {
     return tinify
   }
 
+  async compressImages(imgFiles: string[], option: CompressOption = { debug: true }) {
+    const logs = (await Promise.all(imgFiles.map(imgFile => this.compressImage(imgFile, { ...option, debug: false }))))
+      .map(this.debugLog)
+
+    if (option.debug)
+      logs.forEach(log => consola.info(log))
+  }
+
   /**
    * Compress image
    * @param filePath need to compress image file path
@@ -27,8 +32,8 @@ export class TinifyCompressor {
    */
   async compressImage(filePath: string, { handler, convertType, transform, debug = true }: CompressOption = {}) {
     let source = this.tinifyInstance.fromFile(filePath)
-    const imgName = filePath.split(separator).pop()!
-    const newPath = handler ? handler(filePath, imgName) : filePath
+    const fileName = filePath.split(separator).pop()!
+    const newPath = handler ? handler(filePath, fileName) : filePath
 
     if (convertType) {
       source = source.convert({
@@ -46,17 +51,18 @@ export class TinifyCompressor {
 
     await source.toFile(newPath)
 
-    const { size: nextSize } = await fs.stat(filePath)
+    const { size: nextSize } = await fs.stat(newPath)
 
-    debug && this.debugLogSize(prevSize, nextSize, imgName)
+    debug && consola.info(this.debugLog({ prevSize, nextSize, fileName }))
+
+    return { prevSize, nextSize, fileName }
   }
 
-  async debugLogSize(prev: number, next: number, fileName?: string) {
-    const pS = formatFileSize(prev)
-    const nS = formatFileSize(next)
-    const diff = formatFileSize(prev - next)
-
-    consola.info(`Compress ${fileName} success, size: ${pS} -> ${nS}, diff: ${diff}`)
-    // const { size } = await fs.stat(path)
+  private debugLog({ prevSize, nextSize, fileName }: { prevSize: number; nextSize: number; fileName: string }) {
+    return `
+    Compress suceess of ${formatFileName(fileName, 16)},
+    Size: ${formatFileSize(prevSize).padEnd(9)} -> ${formatFileSize(nextSize).padEnd(9)},
+    Diff: ${formatFileSize(prevSize - nextSize).padEnd(9)}
+    `.trim().replace(/\n\s+/g, ' ')
   }
 }

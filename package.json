@@ -47,7 +47,7 @@
     "release": "bumpp --commit --push --tag && pnpm publish",
     "start": "esno src/index.ts",
     "lint": "eslint .",
-    "test": "vitest",
+    "test": "rimraf test/output && esno src/test.ts",
     "test:update": "vitest -u",
     "typecheck": "tcs --noEmit"
   },
