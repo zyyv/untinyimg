@@ -66,8 +66,5 @@
     "unconfig": "^0.3.7",
     "vite": "^4.1.1",
     "vitest": "^0.28.4"
-  },
-  "untiny": {
-    "apiKey": "RWDMNgkQJGldpgBVhn5MJ2944cHxN2CK"
   }
 }
