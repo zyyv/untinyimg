@@ -28,11 +28,9 @@ export interface CompressOption {
 }
 
 export interface Config {
-  untiny: {
-    /**
+  /**
      * Your API key
      * @default ''
      */
-    apiKey: string
-  }
+  apiKey: string
 }

@@ -1,5 +1,3 @@
 export default {
-  untiny: {
-    apiKey: '222',
-  },
+  apiKey: '222',
 }

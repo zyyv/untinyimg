@@ -1,9 +1,7 @@
 import path from 'path'
 import { describe, expect, test } from 'vitest'
-import { loadConfig } from 'unconfig'
-import { sourcePackageJsonFields } from 'unconfig/presets'
 import { formatFileName, formatFileSize } from '../src/utils'
-import type { Config } from '../src/types'
+import { getConfig } from '../src/cli-start'
 
 describe('Assets Imgs', () => {
   test('formatFileSize', () => {
@@ -65,24 +63,11 @@ describe('Assets Imgs', () => {
 describe('Unconfigured', () => {
   test('unconfigured', async () => {
     const cwd = path.resolve(__dirname, './fixtures/configs')
-    const { config } = await loadConfig<Config>({
-      sources: [
-        {
-          files: 'untiny.config',
-          extensions: ['ts', 'mts', 'cts', 'js', 'mjs', 'cjs', 'json', ''],
-        },
-        sourcePackageJsonFields({
-          fields: 'untiny',
-        }),
-      ],
-      cwd,
-    })
+    const config = await getConfig(cwd)
 
     expect(config).toMatchInlineSnapshot(`
       {
-        "untiny": {
-          "apiKey": "RWDMNgkQJGldpgBVhn5MJ2944cHxN2CK",
-        },
+        "apiKey": "RWDMNgkQJGldpgBVhn5MJ2944cHxN2CK",
       }
     `)
   })

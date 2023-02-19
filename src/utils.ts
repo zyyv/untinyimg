@@ -6,6 +6,14 @@ export async function isPathValid(filePath: string): Promise<boolean> {
   return await fs.pathExists(filePath)
 }
 
+export async function isDir(path: string) {
+  return (await fs.stat(path)).isDirectory()
+}
+
+export async function isFile(path: string) {
+  return (await fs.stat(path)).isFile()
+}
+
 export function getCpus(): number {
   return os.cpus().length
 }

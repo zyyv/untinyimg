@@ -12,7 +12,7 @@ export class TinifyCompressor {
 
   constructor(key: string) {
     if (!key)
-      throw new Error('Please enter your API key')
+      throw new Error('Cannot find your api key.')
 
     this.tinifyInstance = this.init(key)
   }
@@ -127,6 +127,6 @@ export class TinifyCompressor {
 }
 
 export async function createUntiny(key?: string) {
-  key = key ?? (await getConfig()).untiny.apiKey
+  key = key ?? (await getConfig()).apiKey
   return new TinifyCompressor(key)
 }
