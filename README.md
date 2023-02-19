@@ -9,7 +9,7 @@ npm i -D untinyimg
 ```
 
 ```shell
-untiny -h # help
+untiny # help
 ```
 
 ### Api
