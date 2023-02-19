@@ -9,6 +9,9 @@ import { getConfig } from './cli-start'
 
 export class TinifyCompressor {
   private tinifyInstance: typeof tinify
+  Total = 0
+  TotalBeforeSize = 0
+  TotalAfterSize = 0
 
   constructor(key: string) {
     if (!key)
@@ -67,6 +70,9 @@ export class TinifyCompressor {
     const { size: prevSize } = await fs.stat(filePath)
     await source.toFile(newPath)
     const { size: nextSize } = await fs.stat(newPath)
+    this.Total++
+    this.TotalBeforeSize += prevSize
+    this.TotalAfterSize += nextSize
 
     debug && consola.info(this.debugLog({ prevSize, nextSize, fileName }))
 

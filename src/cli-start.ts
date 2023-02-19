@@ -5,7 +5,7 @@ import { sourcePackageJsonFields } from 'unconfig/presets'
 import * as p from '@clack/prompts'
 import color from 'picocolors'
 import type { Config } from './types'
-import { isDir, isFile, isPathValid } from './utils'
+import { formatFileSize, isDir, isFile, isPathValid } from './utils'
 import { TinifyCompressor } from '.'
 
 export async function getConfig(cwd = process.cwd()) {
@@ -48,20 +48,20 @@ export async function startCli(cwd = process.cwd()) {
 
   const s = p.spinner()
   if (await isDir(project.input)) {
-    s.start('Compressing ~ ~')
+    s.start('Compressing')
     await tinifyIns.compressDir(project.input, {
       handler: _ => _.replace(project.input, project.output),
       debug: project.debug,
     })
-    s.stop('Compressed ~ ~')
+    s.stop('Compressed!')
   }
   else if (await isFile(project.input)) {
-    s.start('Compressing ~ ~')
+    s.start('Compressing')
     await tinifyIns.compressImage(project.input, {
       handler: _ => _.replace(project.input, project.output),
       debug: project.debug,
     })
-    s.stop('Compressed ~ ~')
+    s.stop('Compressed!')
   }
   else {
     p.cancel('Please enter a valid path.')
@@ -69,10 +69,10 @@ export async function startCli(cwd = process.cwd()) {
   }
 
   const tips = `
-End of compression: ${color.cyan('100')} images.
-Before: ${color.red('100 KB')}
-After : ${color.green('50 KB')}
-Diff  : ${color.yellow('50 KB')}
+End of compression: ${color.cyan(tinifyIns.Total)} images.
+Before: ${color.red(formatFileSize(tinifyIns.TotalBeforeSize))}
+After : ${color.green(formatFileSize(tinifyIns.TotalAfterSize))}
+Diff  : ${color.yellow(formatFileSize(tinifyIns.TotalBeforeSize - tinifyIns.TotalAfterSize))}
 `.trim()
 
   p.note(tips, 'Compression statistics:')
