@@ -3,14 +3,46 @@
 A cli tools of tinypng.
 
 ## Usage
-### Cli
 ```shell
 npm i -D untinyimg
 ```
 
+### Cli
+
+You can use `untiny` command in your terminal
+
 ```shell
-untiny # start cli
+untiny -h # help
 ```
+![untiny help](./public/commondLine.png)
+
+#### `untiny ci`
+Compress a single image.
+
+```shell
+untiny ci ./test.png
+```
+
+#### `untiny cis`
+Compress an array of images.
+
+```shell
+untiny cis ./test.png ./test2.png
+```
+
+#### `untiny cd`
+Compress all images in the directory.
+
+```shell
+untiny cd ./test
+```
+
+#### untiny cli options
+
+- `-c` or `--config` your config file path
+- `-k` or `--key` your tinypng api key
+- `-o` or `--out` your output file path
+- `-d` or `--debug` print debug information
 
 ### Api
 
