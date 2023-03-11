@@ -1,8 +1,8 @@
-import path from 'path'
+import path from 'node:path'
 import tinify from 'tinify'
 import fs from 'fs-extra'
 import consola from 'consola'
-import { IMG_EXT, separator } from './constant'
+import { IMG_EXT } from './constant'
 import type { CompressOption } from './types'
 import { formatFileName, formatFileSize, isPathValid } from './utils'
 import { getConfig } from './cli-start'
@@ -45,7 +45,7 @@ export class TinifyCompressor {
    */
   async compressImage(filePath: string, { handler, convertType, transform, debug = true }: CompressOption = {}) {
     let source = this.tinifyInstance.fromFile(filePath)
-    const fileName = filePath.split(separator).pop()!
+    const fileName = path.basename(filePath)
     const newPath = handler ? handler(filePath, fileName) : filePath
     const dirPath = path.dirname(newPath)
 

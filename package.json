@@ -40,31 +40,32 @@
     "dev": "unbuild --stub",
     "prepublishOnly": "pnpm run build",
     "release": "bumpp --commit --push --tag",
-    "lint": "eslint .",
+    "lint": "eslint --cache .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest",
     "test:update": "vitest -u",
     "typecheck": "tcs --noEmit"
   },
   "dependencies": {
-    "@clack/prompts": "^0.4.3",
+    "@clack/prompts": "^0.6.3",
     "consola": "^2.15.3",
     "picocolors": "^1.0.0",
     "tinify": "^1.7.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.2",
-    "@babel/types": "^7.20.2",
+    "@antfu/eslint-config": "^0.36.0",
+    "@babel/types": "^7.21.2",
     "@types/fs-extra": "^11.0.1",
-    "@types/node": "^18.11.9",
-    "bumpp": "^8.2.1",
-    "eslint": "^8.27.0",
+    "@types/node": "^18.15.0",
+    "bumpp": "^9.0.0",
+    "eslint": "^8.36.0",
     "esno": "^0.16.3",
     "fs-extra": "^11.1.0",
-    "rimraf": "^4.1.2",
+    "rimraf": "^4.4.0",
     "typescript": "^4.8.4",
-    "unbuild": "^1.1.1",
+    "unbuild": "^1.1.2",
     "unconfig": "^0.3.7",
-    "vite": "^4.1.1",
-    "vitest": "^0.28.4"
+    "vite": "^4.1.4",
+    "vitest": "^0.29.2"
   }
 }

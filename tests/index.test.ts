@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { describe, expect, test } from 'vitest'
 import { formatFileName, formatFileSize } from '../src/utils'
 import { getConfig } from '../src/cli-start'

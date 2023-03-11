@@ -1,5 +1,5 @@
-import { setTimeout } from 'timers/promises'
-import path from 'path'
+import { setTimeout } from 'node:timers/promises'
+import path from 'node:path'
 import { loadConfig } from 'unconfig'
 import { sourcePackageJsonFields } from 'unconfig/presets'
 import * as p from '@clack/prompts'
