@@ -60,13 +60,11 @@ export async function startCli(cwd = process.cwd()) {
   cli.help()
   cli.version(pkg.version)
   cli.parse()
-
-  // console.log(JSON.stringify(parsed, null, 2))
 }
 
 async function compress(options: CliOption) {
-  const key = options.key || (await resolveConfig(options.cwd, options.config)).config.apiKey
-  const untinyIns = await createUntiny(key)
+  options.key = options.key || (await resolveConfig(options.cwd, options.config)).config.apiKey
+  const untinyIns = await createUntiny(options.key)
 
   const handler = (_originPath: string, originImgName: string) => resolve(...[
     options.out!.startsWith('/') ? '' : options.cwd,
