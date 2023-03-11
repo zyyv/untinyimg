@@ -1,7 +1,7 @@
 {
   "name": "untinyimg",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A cli tools of tinypng.",
   "author": "Chris <https://github.com/zyyv>",
   "license": "MIT",
