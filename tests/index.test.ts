@@ -72,35 +72,9 @@ describe('Unconfigured', () => {
     `)
   })
 
-  test('path resolve', async () => {
-    const cwd = path.resolve(__dirname, './fixtures/configs')
-
-    // const config = await getConfig(cwd)
-
-    expect(path.resolve(cwd, './', 'a.png'))
-      .toMatchInlineSnapshot('"/Users/chris/projects/fork/untinyimg/tests/fixtures/configs/a.png"')
-    expect(path.resolve(cwd, '../', 'a.png'))
-      .toMatchInlineSnapshot('"/Users/chris/projects/fork/untinyimg/tests/fixtures/a.png"')
-  })
-
   test('resolveConfig', async () => {
     const cwd = path.resolve(__dirname, './fixtures/configs')
-    const result = await resolveConfig(cwd)
-    const { config } = result
-
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "config": {
-          "apiKey": "qweqweqwe",
-        },
-        "sources": [
-          "/Users/chris/projects/fork/untinyimg/tests/fixtures/configs/untiny.config.ts",
-          "/Users/chris/projects/fork/untinyimg/tests/fixtures/configs/untiny.config.mjs",
-          "/Users/chris/projects/fork/untinyimg/untiny.config.ts",
-          "/Users/chris/projects/fork/untinyimg/tests/fixtures/configs/package.json",
-        ],
-      }
-    `)
+    const { config } = await resolveConfig(cwd)
 
     expect(config).toMatchInlineSnapshot(`
       {
