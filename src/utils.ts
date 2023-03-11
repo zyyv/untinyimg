@@ -53,3 +53,7 @@ export function formatFileName(name: string, length = 12, ellipsis = '...') {
   const r = length - ellipsis.length - l
   return `${nameWithoutExt.slice(0, l)}${ellipsis}${nameWithoutExt.slice(nameLength - r)}${ext}`
 }
+
+export function toArray<T>(val: T | T[]): T[] {
+  return Array.isArray(val) ? val : [val]
+}
