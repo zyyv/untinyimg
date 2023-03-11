@@ -5,7 +5,7 @@ import consola from 'consola'
 import { IMG_EXT } from './constant'
 import type { CompressOption } from './types'
 import { formatFileName, formatFileSize, isPathValid } from './utils'
-import { getConfig } from './cli-start'
+import { getConfig } from './config'
 
 export class TinifyCompressor {
   private tinifyInstance: typeof tinify

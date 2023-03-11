@@ -1,4 +1,4 @@
 import consola from 'consola'
-import { startCli } from './cli-start'
+import { startCli } from './ui'
 
 startCli().catch(consola.error)
