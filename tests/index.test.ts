@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { describe, expect, test } from 'vitest'
 import { formatFileName, formatFileSize } from '../src/utils'
-import { getConfig } from '../src/cli-start'
+import { getConfig, resolveConfig } from '../src/config'
 
 describe('Assets Imgs', () => {
   test('formatFileSize', () => {
@@ -67,7 +67,33 @@ describe('Unconfigured', () => {
 
     expect(config).toMatchInlineSnapshot(`
       {
-        "apiKey": "RWDMNgkQJGldpgBVhn5MJ2944cHxN2CK",
+        "apiKey": "qweqweqwe",
+      }
+    `)
+  })
+
+  test('resolveConfig', async () => {
+    const cwd = path.resolve(__dirname, './fixtures/configs')
+    const result = await resolveConfig(cwd)
+    const { config } = result
+
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "config": {
+          "apiKey": "qweqweqwe",
+        },
+        "sources": [
+          "/Users/chris/projects/fork/untinyimg/tests/fixtures/configs/untiny.config.ts",
+          "/Users/chris/projects/fork/untinyimg/tests/fixtures/configs/untiny.config.mjs",
+          "/Users/chris/projects/fork/untinyimg/untiny.config.ts",
+          "/Users/chris/projects/fork/untinyimg/tests/fixtures/configs/package.json",
+        ],
+      }
+    `)
+
+    expect(config).toMatchInlineSnapshot(`
+      {
+        "apiKey": "qweqweqwe",
       }
     `)
   })

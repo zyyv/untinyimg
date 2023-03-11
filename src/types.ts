@@ -33,4 +33,9 @@ export interface Config {
      * @default ''
      */
   apiKey: string
+
+  /**
+   * Custom your config file path
+   */
+  configFile?: string | false
 }
