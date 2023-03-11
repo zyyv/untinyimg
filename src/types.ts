@@ -39,3 +39,13 @@ export interface Config {
    */
   configFile?: string | false
 }
+
+export interface CliOption {
+  path?: string | string[]
+  type: 'image' | 'images' | 'directory'
+  config?: Config
+  key?: string
+  out?: string
+  debug?: boolean
+  cwd: string
+}

@@ -1,7 +1,10 @@
+import { resolve } from 'node:path'
 import cac from 'cac'
 import type { Command } from 'cac'
 import pkg from '../../package.json'
+import type { CliOption } from '../types'
 import { resolveConfig } from '../config'
+import { createUntiny } from '..'
 import { promptUI } from './prompt'
 
 export async function startCli(cwd = process.cwd()) {
@@ -11,30 +14,41 @@ export async function startCli(cwd = process.cwd()) {
     return command
       .option('-c, --config [file]', 'Config file')
       .option('-k, --key <key>', 'Your access key')
-      .option('-o, --out <out>', 'Output file', { default: cwd })
+      .option('-o, --out <out>', 'Output file', { default: './' })
       .option('-d, --debug', 'Open debug mode')
   }
 
   passCommonOptions(cli.command('ci <path>', 'compress a image'))
     .example('untiny ci ./test.png')
     .action(async (path, options) => {
-      console.log(path, options)
+      compress({
+        cwd,
+        path,
+        type: 'image',
+        ...options,
+      })
     })
 
   passCommonOptions(cli.command('cis <...paths>', 'compress array of images'))
     .example('untiny cis ./test.png ./test2.png')
-    .action(async (paths, options) => {
-      console.log(paths, options)
-
-      const { config } = await resolveConfig(cwd, options.config)
-
-      // console.log(JSON.stringify(config, null, 2))
+    .action(async (path, options) => {
+      compress({
+        cwd,
+        path,
+        type: 'images',
+        ...options,
+      })
     })
 
   passCommonOptions(cli.command('cd <dir>', 'compress a directory'))
     .example('untiny cd ./assets/images')
-    .action(async (dir, options) => {
-      console.log(dir, options)
+    .action(async (path, options) => {
+      compress({
+        cwd,
+        path,
+        type: 'directory',
+        ...options,
+      })
     })
 
   cli
@@ -48,4 +62,34 @@ export async function startCli(cwd = process.cwd()) {
   cli.parse()
 
   // console.log(JSON.stringify(parsed, null, 2))
+}
+
+async function compress(options: CliOption) {
+  const key = options.key || (await resolveConfig(options.cwd, options.config)).config.apiKey
+  const untinyIns = await createUntiny(key)
+
+  const handler = (_originPath: string, originImgName: string) => resolve(...[
+    options.out!.startsWith('/') ? '' : options.cwd,
+    options.out!,
+    originImgName,
+  ].filter(Boolean))
+
+  if (options.type === 'image') {
+    await untinyIns.compressImage(options.path as string, {
+      handler,
+      debug: options.debug,
+    })
+  }
+  else if (options.type === 'images') {
+    await untinyIns.compressImages(options.path as string[], {
+      handler,
+      debug: options.debug,
+    })
+  }
+  else if (options.type === 'directory') {
+    await untinyIns.compressDir(options.path as string, {
+      handler,
+      debug: options.debug,
+    })
+  }
 }
