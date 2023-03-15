@@ -7,7 +7,7 @@ import type { CompressOption } from './types'
 import { formatFileName, formatFileSize, isPathValid } from './utils'
 import { getConfig } from './config'
 
-export class TinifyCompressor {
+class TinifyCompressor {
   private tinifyInstance: typeof tinify
   Total = 0
   TotalBeforeSize = 0
