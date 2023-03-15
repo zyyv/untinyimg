@@ -1,6 +1,7 @@
 import path from 'node:path'
 import os from 'node:os'
 import fs from 'fs-extra'
+import type { CPmodel } from './types'
 
 export async function isPathValid(filePath: string): Promise<boolean> {
   return await fs.pathExists(filePath)
@@ -56,4 +57,12 @@ export function formatFileName(name: string, length = 12, ellipsis = '...') {
 
 export function toArray<T>(val: T | T[]): T[] {
   return Array.isArray(val) ? val : [val]
+}
+
+export function debugLog({ prevSize, nextSize, fileName }: CPmodel) {
+  return `
+  Compress suceess of ${formatFileName(fileName, 16)},
+  Size: ${formatFileSize(prevSize).padEnd(9)} -> ${formatFileSize(nextSize).padEnd(9)},
+  Diff: ${formatFileSize(prevSize - nextSize).padEnd(9)}
+  `.trim().replace(/\n\s+/g, ' ')
 }

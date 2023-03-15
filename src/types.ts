@@ -49,3 +49,9 @@ export interface CliOption {
   debug?: boolean
   cwd: string
 }
+
+export interface CPmodel {
+  prevSize: number
+  nextSize: number
+  fileName: string
+}
