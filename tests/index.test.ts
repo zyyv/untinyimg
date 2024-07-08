@@ -1,9 +1,9 @@
 import path from 'node:path'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { getConfig, resolveConfig } from '../src/config'
 
-describe('Unconfigured', () => {
-  test('unconfigured', async () => {
+describe('unconfigured', () => {
+  it('unconfigured', async () => {
     const cwd = path.resolve(__dirname, './fixtures/configs')
     const config = await getConfig(cwd)
 
@@ -14,7 +14,7 @@ describe('Unconfigured', () => {
     `)
   })
 
-  test('resolveConfig', async () => {
+  it('resolveConfig', async () => {
     const cwd = path.resolve(__dirname, './fixtures/configs')
     const { config } = await resolveConfig(cwd)
 

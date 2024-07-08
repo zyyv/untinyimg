@@ -1,4 +1,5 @@
 import { dirname, resolve } from 'node:path'
+import process from 'node:process'
 import fs from 'node:fs'
 import { createConfigLoader, loadConfig } from 'unconfig'
 import { sourcePackageJsonFields } from 'unconfig/presets'

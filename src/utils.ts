@@ -34,7 +34,7 @@ export function formatFileSize(size: number) {
  * @param name file name
  * @param length length of formatted file name
  * @param ellipsis ellipsis string
- * @returns
+ * @returns formatted file name
  */
 export function formatFileName(name: string, length = 12, ellipsis = '...') {
   if (name.length <= length)

@@ -1,15 +1,15 @@
 import path from 'node:path'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { debugLog, formatFileName, formatFileSize } from '../src/utils'
 
-describe('Utils', () => {
-  test('formatFileSize', () => {
+describe('utils', () => {
+  it('formatFileSize', () => {
     expect(formatFileSize(1024)).toBe('1.00 KB')
     expect(formatFileSize(1024 * 1024)).toBe('1.00 MB')
     expect(formatFileSize(1024 * 1024 * 1024)).toBe('1.00 GB')
   })
 
-  test('formatFileName', () => {
+  it('formatFileName', () => {
     expect(path.dirname('/Users/chris/projects/fork/tiny-sdk/test/assets/imgs/WechatIMG99.jpeg'))
       .toBe('/Users/chris/projects/fork/tiny-sdk/test/assets/imgs')
 
@@ -23,7 +23,7 @@ describe('Utils', () => {
     expect(formatFileName(name, 30).length).toMatchInlineSnapshot('30')
   })
 
-  test('debugLog', () => {
+  it('debugLog', () => {
     const result = [
       {
         prevSize: 1022244,

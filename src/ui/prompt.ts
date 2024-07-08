@@ -1,4 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
+import process from 'node:process'
 import path from 'node:path'
 import * as p from '@clack/prompts'
 import color from 'picocolors'

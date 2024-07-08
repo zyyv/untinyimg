@@ -29,9 +29,9 @@ export interface CompressOption {
 
 export interface Config {
   /**
-     * Your API key
-     * @default ''
-     */
+   * Your API key
+   * @default ''
+   */
   apiKey: string
 
   /**

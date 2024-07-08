@@ -1,4 +1,5 @@
 import { resolve } from 'node:path'
+import process from 'node:process'
 import cac from 'cac'
 import type { Command } from 'cac'
 import pkg from '../../package.json'

@@ -51,7 +51,8 @@ class TinifyCompressor {
     try {
       await fs.ensureDir(dirPath)
     }
-    catch (error) {
+    catch (e) {
+      consola.warn(`error: ${e}`)
       await fs.mkdir(dirPath)
     }
 
@@ -74,7 +75,9 @@ class TinifyCompressor {
     this.TotalBeforeSize += prevSize
     this.TotalAfterSize += nextSize
 
-    debug && consola.info(debugLog({ prevSize, nextSize, fileName }))
+    if (debug) {
+      consola.info(debugLog({ prevSize, nextSize, fileName }))
+    }
 
     return { prevSize, nextSize, fileName }
   }
@@ -83,7 +86,7 @@ class TinifyCompressor {
    * Get image files from directory
    *
    * @param {string} dir directory path
-   * @param {string[]} [extnames=['.png', '.jpg', '.jpeg', '.webp']] extnames file extensions
+   * @param {string[]} [extnames] extnames file extensions
    * @returns {Promise<string[]>} image files of path[]
    * @example
    * const imgFiles = await tinifyIns.getImgFiles(assetsDir)
