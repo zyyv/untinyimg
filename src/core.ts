@@ -1,7 +1,7 @@
 import path from 'node:path'
 import tinify from 'tinify'
 import fs from 'fs-extra'
-import consola from 'consola'
+import { consola } from 'consola'
 import { IMG_EXT } from './constant'
 import type { CPmodel, CompressOption } from './types'
 import { debugLog, isPathValid } from './utils'

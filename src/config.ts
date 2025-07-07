@@ -50,6 +50,7 @@ export async function resolveConfig<U extends Config>(
   }
 
   const resolved = resolve(configOrPath)
+  console.dir({ resolved })
 
   let isFile = false
   if (fs.existsSync(resolved) && fs.statSync(resolved).isFile()) {
@@ -72,6 +73,7 @@ export async function resolveConfig<U extends Config>(
   })
 
   const result = await loader.load()
+  console.dir({ result })
   result.config = Object.assign(defaults, result.config || inlineConfig)
 
   return result
